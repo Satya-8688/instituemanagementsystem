@@ -1,0 +1,17 @@
+.container {
+    height: 100vh;
+    width: 100vw;
+    /* background-color: bisque; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row {
+    text-align: center;
+    width: auto;
+    height: auto;
+    padding: 20px;
+    border-radius: 8%;
+    background-color: burlywood;
+}

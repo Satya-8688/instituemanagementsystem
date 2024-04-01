@@ -1,0 +1,150 @@
+<h4>Student form:-</h4>
+<form action="" [formGroup]="userform">
+    <div class="col sm-8">
+        <label for="">Name:</label>
+        <input type="text" placeholder=" Enter your name" formControlName="name"><br>
+        <div *ngIf="userform.get('name')?.touched">
+            <p class="error" *ngIf="userform.get('name')?.errors?.['required']">name is required</p>
+            <p class="error" *ngIf="userform.get('name')?.errors?.['minlength']">minimum 3 letters required</p>
+        </div>
+        <label for="">Gender:</label>
+        <input type="radio" placeholder=" " formControlName="gender" value="male">
+        <label for="male"> Male</label>
+        <input type="radio" value="female" formControlName="gender">
+        <label for="female">Female</label>
+        <br>
+        <label for="">Mobile:</label>
+        <input type="number" placeholder="Enter mobile no" formControlName="mobile"><br>
+        <div *ngIf="userform.get('mobile')?.touched">
+            <p class="error" *ngIf="userform.get('mobile')?.errors?.['required']">mobile is required</p>
+            <p class="error" *ngIf="userform.get('mobile')?.errors?.['min']">minimum 10 digits</p>
+            <p class="error" *ngIf="userform.get('mobile')?.errors?.['max']">maximum 10 digits</p>
+        </div>
+        <label for="">Email:</label>
+        <input type="email" placeholder="Enter email id" formControlName="email"><br>
+        <div *ngIf="userform.get('email')?.touched">
+            <p class="error" *ngIf="userform.get('email')?.errors?.['required']">email is required</p>
+            <p class="error" *ngIf="userform.get('email')?.errors?.['email']">Invalid email format</p>
+            <p class="error" *ngIf="userform.get('email')?.errors?.['tcsMail']">Only tcsMail is accepted </p>
+
+        </div>
+        <label for="">Batch:</label>
+        <input type="date" placeholder="" formControlName="batch">
+        <div *ngIf="userform.get('batch')?.touched">
+            <p class="error" *ngIf="userform.get('batch')?.errors?.['required']"> date is required</p>
+        </div>
+        <br><br>
+        <h3>Address:-</h3>
+        <div formGroupName="address">
+            <label for="">city:</label>
+            <input type="text" placeholder=" Enter city name" formControlName="city"><br>
+            <div *ngIf="userform.get('address')?.get('city')?.touched">
+                <p class="error" *ngIf="userform.get('address')?.get('city')?.errors?.['required']"> city is required
+                </p>
+            </div>
+            <label for="">mandal:</label>
+            <input type="text" placeholder=" Enter mandal name" formControlName="mandal"><br>
+            <div *ngIf="userform.get('address')?.get('mandal')?.touched">
+                <p class="error" *ngIf="userform.get('address')?.get('mandal')?.errors?.['required']"> mandal is
+                    required</p>
+            </div>
+            <label for="">district:</label>
+            <input type="text" placeholder=" Enter district name" formControlName="district"><br>
+            <div *ngIf="userform.get('address')?.get('district')?.touched">
+                <p class="error" *ngIf="userform.get('address')?.get('district')?.errors?.['required']"> district is
+                    required</p>
+            </div>
+
+            <label for="">state:</label>
+            <input type="text" placeholder=" Enter city name" formControlName="state"><br>
+            <div *ngIf="userform.get('address')?.get('state')?.touched">
+                <p class="error" *ngIf="userform.get('address')?.get('state')?.errors?.['required']"> state is required
+                </p>
+            </div>
+            <label for="">pincode:</label>
+            <input type="text" placeholder="" formControlName="pincode"><br>
+            <div *ngIf="userform.get('address')?.get('pincode')?.touched">
+                <p class="error" *ngIf="userform.get('address')?.get('pincode')?.errors?.['required']">pincode is
+                    required</p>
+                <p class="error" *ngIf="userform.get('address')?.get('pincode')?.errors?.['min']">minimum 6 digits</p>
+                <p class="error" *ngIf="userform.get('address')?.get('pincode')?.errors?.['max']">maximum 6 digits</p>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <div class="col sm-4">
+        <h3>Educational details:</h3>
+        <button class=" btn btn-info" (click)="add()">Add</button>
+        <br>
+        <div formArrayName="education">
+            <div *ngFor="let education of educationFormArray.controls; let i=index">
+                <div formGroupName="{{i}}">
+                    <h3> Education:{{i+1}}</h3>
+                    <label for="">Qualification:</label>
+                    <input type="text" formControlName="qualification"><br>
+                    <div *ngIf="educationFormArray.controls[i].get('qualification')?.touched">
+                        <p class="error"
+                            *ngIf="educationFormArray.controls[i].get('qualification')?.errors?.['required']"> qualification is required</p>
+                    </div>
+                    <label for="">Year:</label>
+                    <input type="month" formControlName="year" min="2024-02-10"><br>
+                    <div *ngIf="educationFormArray.controls[i].get('year')?.touched">
+                        <p class="error"
+                            *ngIf="educationFormArray.controls[i].get('year')?.errors?.['required']"> year is required</p>
+                    </div>
+                    <label for="">Percentage:</label>
+                    <input type="text" formControlName="percentage"><br><br>
+                    <button class="btn btn-warning" (click)="delete(i)">Delete</button>
+
+                </div>
+            </div>
+        </div>
+        <br>
+        <div formGroupName="company">
+            <h2>Company:-</h2>
+            <label for="">Name:</label>
+            <input type="text" placeholder="Enter Company name" formControlName="name1"><br>
+            <div *ngIf="userform.get('company')?.get('name1')?.touched">
+                <p class="error" *ngIf="userform.get('company')?.get('name1')?.errors?.['required']">Name is required</p>
+            </div>
+
+            <label for="">location:</label>
+            <input type="text" placeholder="Enter location" formControlName="location"><br>
+            <div *ngIf="userform.get('company')?.get('location')?.touched">
+                <p class="error" *ngIf="userform.get('company')?.get('location')?.errors?.['required']">location is required</p>
+            </div>
+            <label for="">package:</label>
+            <input type="number" formControlName="package"><br>
+            <div *ngIf="userform.get('company')?.get('package')?.touched">
+                <p class="error" *ngIf="userform.get('company')?.get('package')?.errors?.['required']">package is required</p>
+            </div>
+            <label for="">Offerdate:</label>
+            <input type="date" formControlName="offerdate"><br>
+            <div *ngIf="userform.get('company')?.get('offerdate')?.touched">
+                <p class="error" *ngIf="userform.get('company')?.get('offerdate')?.errors?.['required']">offerdate is required</p>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label for="">source:</label>
+            <input type="radio" formControlName="source" value="direct">
+            <label for=""> Direct</label>
+            <input type="radio" formControlName="source" value="referral">
+            <label for=""> Referral</label><br>
+            <div *ngIf="userform.get('source')?.value=='direct'">
+                <label for="social media"> source from</label>
+                <select name="" id="" formControlName="sourcefrom">
+                    <option value=""> select</option>
+                    <option value="socialMedia"> social media</option>
+                    <option value="office">office</option>
+                </select>
+            </div>
+            <div *ngIf="userform.get('source')?.value=='referral'">
+                <label for="">referralname:</label>
+                <input type="text" formControlName="referral"><br><br>
+            </div>
+            <br>
+        </div>
+        <button (click)="submit()" class="btn btn-dark" [disabled]="userform.invalid">submit</button>
+    </div>
+</form>

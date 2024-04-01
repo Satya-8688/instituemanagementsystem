@@ -1,0 +1,59 @@
+<div class="table">
+    <label for="">search</label>
+     <input type="text" [(ngModel)]="term" (keyup)="filter()"> 
+    <label for="">pagination</label>
+     <select [(ngModel)]="pageNo"  (change)="getpagedstudents()">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option> 
+        <option value="5">5</option>
+        <option value="6">6</option>
+    </select>
+    <label for="">column</label>
+<select name="" id="" [(ngModel)]="column">
+    <option value="name">name</option>
+    <option value="district">district</option>
+    <option value="state">state</option>
+    
+</select>
+<label for="">order</label>
+<select name="" id="" [(ngModel)]="order">
+    <option value="asc">asc</option>
+    <option value="desc">desc</option>
+</select>
+<button (click)="getsortstudents()">sort</button>
+
+<table  class=" table table-stripped table-light">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>gender</th>
+            <th>mobile</th>
+            <th>batch</th>
+            <th>district</th>
+            <th>state</th>
+            <th>companyname</th>
+            <th>package</th> 
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let student of studentdata">
+            <td>{{student.id}}</td>
+            <td>{{student.name}}</td>
+            <td>{{student.gender}}</td>
+            <td>{{student.mobile}}</td>
+            <td>{{student.batch}}</td>
+            <td>{{student.address.district}}</td>
+            <td>{{student.address.state}}</td>
+            <td>{{student.company.name1}}</td>
+            <td>{{student.company.package}}</td>
+            <td> <button class="btn btn-primary">Edit</button></td>
+            <td><button class="btn btn-danger" (click)="deletedstudents(student.id)">delete</button></td>
+        </tr>
+    </tbody>
+</table>
+
+</div>
